@@ -1,6 +1,6 @@
-#R Markdown: Como Automatizar a Geração de Relatórios em R e LaTeX
+# R Markdown: Como Automatizar a Geração de Relatórios em R e LaTeX
 
-##Resumo
+## Resumo
 
 Uma das características mais desejáveis em pesquisa científica e análise de dados é a sua reprodutibilidade. É importante que os métodos estatísticos aplicados sejam auditados independentemente por outras pessoas.
 
@@ -10,7 +10,7 @@ Este minicurso vai mostrar como podemos utilizar a linguagem R Markdown para jun
 
 _Minicurso ministrado na Universidade Federal do Rio Grande do Norte, durante a Semana da Estatística 2017_
 
-##Requisitos do Sistema
+## Requisitos do Sistema
 
 Para rodar os exemplos disponíveis neste repositório, é necessário instalar os seguintes programas em seu computador:
 
@@ -26,7 +26,7 @@ Para rodar os exemplos disponíveis neste repositório, é necessário instalar 
 
 a ser rodado dentro do RStudio
 
-##Organização do Repositório
+## Organização do Repositório
 
 Este repositório possui as seguintes pastas:
 
