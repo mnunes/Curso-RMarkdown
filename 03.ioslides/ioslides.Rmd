@@ -1,0 +1,81 @@
+---
+title: "R Markdown: Como Automatizar a Geração de Relatórios em R e HTML"
+author: "Marcus Nunes"
+date: "24 de outubro de 2017"
+output: 
+  ioslides_presentation:
+    incremental: true
+    highlight: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Motivação
+
+## Motivação
+
+Markdown é uma linguagem de formatação de texto baseada em texto simples.
+
+A ideia é fugir do paradigma *What You See Is What You Get* (WYSIWYG) dos editores de texto tradicionais.
+
+É possível juntar Markdown e \LaTeX\xspace para criar relatórios de maneira rápida e automatizada.
+
+## Sobre este Minicurso
+
+Este mini curso é um crash course
+
+A ideia é passar conteúdo de forma rápida e eficiente
+
+Ninguém vai se tornar um especialista em RMarkdown daqui a duas horas, mas todos serão capazes de criar os seus próprios relatórios e apresentações integrando R e \LaTeX
+
+# Requisitos
+
+## Requisitos
+
+R: <https://cran.r-project.org/mirrors.html>
+
+RStudio: <https://www.rstudio.com/products/rstudio/download2/>
+
+\LaTeX: <https://miktex.org/download> (Windows)
+
+Pessoas com experiência em R e LaTeX terão mais facilidade com este assunto
+
+
+# Sintaxe
+
+## Sintaxe
+
+Todo documento escrito com o RMarkdown possui três partes:
+
+1. Header: definição do arquivo a ser criado
+
+2. Chunks: local onde colocamos o código do R
+
+3. Texto puro: texto escrito, sem comandos especiais, mesclado aos outputs das funções do R
+
+## Sintaxe
+
+A melhor maneira de começar a trabalhar com RMarkdown é praticando
+
+Abra o arquivo `relatorio.Rmd`
+
+Vamos trabalhar nele juntos, descobrindo o que pode ser feito nesta linguagem
+
+Toda mudança que fizermos no arquivo fonte pode ser visualizada utilizando o comando Ctrl + Shift + K
+
+# Dúvidas?
+
+## Referências
+
+R Markdown: http://rmarkdown.rstudio.com/
+
+Cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+
+Github: https://github.com/rstudio/rmarkdown
+
+StackOverflow: https://stackoverflow.com/questions/tagged/r-markdown
+
+StackOverflow Pt: https://pt.stackoverflow.com/questions/tagged/r
+

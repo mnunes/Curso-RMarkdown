@@ -1,0 +1,55 @@
+---
+title: "Exercícios"
+author: "Marcus Nunes"
+date: "24 de outubro de 2017"
+output: pdf_document
+header-includes:
+   - \usepackage[portuges]{babel}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Relatório
+
+1. Carregue o conjunto de dados `animais.csv` na memória do R. Este arquivo possui os nomes de 28 espécies de animais, com os pesos de seus corpos em kg e de seus cérebros em gramas. Verifique se ele possui 28 linhas e 3 colunas.
+
+```{r leitura}
+animais <- read.csv(file="animais.csv")
+dim(animais)
+```
+
+2. Carregue o pacote `knitr`. Utilize o comando `kable` para criar uma tabela que apresente os dados . Utilize o argumento `col.names` para nomear corretamente as colunas desta tabela. Crie um título para a tabela com o argumento `caption`.
+
+```{r tabela, message=FALSE}
+library(knitr)
+kable(animais, col.names=c("Animal", "Peso do Corpo (kg)", "Peso do Cérebro (g)"), caption="Pesos do corpo (em kg) e dos cérebros (em g) de 28 animais selecionados.")
+```
+
+3. Altere o `caption` da tabela do exercício anterior para incluir `\\label{tab:animais}`. Escreva um pequeno texto descrevendo a tabela `\ref{tab:animais}`.
+
+Como podemos ver na Tabela \ref{tab:animais}, a tendência do peso do cérebro de um animal tende a aumentar se o peso do animal aumenta.
+
+```{r tabelaCaption, message=FALSE}
+library(knitr)
+kable(animais, col.names=c("Animal", "Peso do Corpo (kg)", "Peso do Cérebro (g)"), caption="\\label{tab:animais} Pesos do corpo (em kg) e dos cérebros (em g) de 28 animais selecionados.")
+```
+
+
+4. Crie o gráfico de dispersão deste conjunto de dados. Utilize o peso do cérebro como variável resposta e o peso do corpo como variável preditora. Comente o que é possível perceber nele. Não esqueça de identificar corretamente os eixos.
+
+```{r graficoDispersao01}
+plot(cerebro ~ corpo, data=animais, xlab="Peso do Corpo (kg)", ylab="Peso do Cérebro (g)")
+```
+
+
+```{r graficoDispersao02}
+library(ggplot2)
+ggplot(animais, aes(x=corpo, y=cerebro)) +
+  geom_point()
+```
+
+
+
+iris

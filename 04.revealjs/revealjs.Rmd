@@ -1,0 +1,81 @@
+---
+title: "R Markdown: Como Automatizar a Geração de Relatórios em R e HTML"
+author: "Marcus Nunes"
+date: "24 de outubro de 2017"
+output: 
+  revealjs::revealjs_presentation:
+    theme: default
+    highlight: default
+    transition: convex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Motivação
+
+## Motivação
+
+Markdown é uma linguagem de formatação de texto baseada em texto simples.
+
+A ideia é fugir do paradigma *What You See Is What You Get* (WYSIWYG) dos editores de texto tradicionais.
+
+É possível juntar Markdown e LaTeX para criar relatórios de maneira rápida e automatizada.
+
+## Sobre este Minicurso
+
+Este mini curso é um crash course: https://www.youtube.com/user/crashcourse
+
+A ideia é passar conteúdo de forma rápida e eficiente
+
+Ninguém vai se tornar um especialista em RMarkdown daqui a duas horas, mas todos serão capazes de criar os seus próprios relatórios integrando R e LaTeX
+
+# Requisitos
+
+## Requisitos
+
+- R: <https://cran.r-project.org/mirrors.html>
+- RStudio: <https://www.rstudio.com/products/rstudio/download2/>
+- LaTeX: <https://miktex.org/download> (Windows)
+
+Pessoas com experiência em R e LaTeX terão mais facilidade com este assunto
+
+
+# Sintaxe
+
+## Sintaxe
+
+Todo documento escrito com o RMarkdown possui três partes:
+
+1. Header: definição do arquivo a ser criado
+
+2. Chunks: local onde colocamos o código do R
+
+3. Texto puro: texto escrito, sem comandos especiais, mesclado aos outputs das funções do R
+
+
+## Sintaxe
+
+A melhor maneira de começar a trabalhar com RMarkdown é praticando
+
+Abra o arquivo `relatorio.Rmd`
+
+Vamos trabalhar nele juntos, descobrindo juntos o que pode ser feito nesta linguagem
+
+# Dúvidas?
+
+## Referências
+
+R Markdown: http://rmarkdown.rstudio.com/
+
+Github: https://github.com/rstudio/rmarkdown
+
+StackOverflow: https://stackoverflow.com/questions/tagged/r-markdown
+
+StackOverflow Pt: https://pt.stackoverflow.com/questions/tagged/r
+
+## Gifs? Sim, gifs!
+
+![](CarltonBanks.gif)
+
