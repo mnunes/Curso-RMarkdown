@@ -8,48 +8,123 @@ header-includes:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+tidy.opts=list(blank=FALSE, width.cutoff=60)
 ```
 
 ## Relatório
 
-1. Carregue o conjunto de dados `animais.csv` na memória do R. Este arquivo possui os nomes de 28 espécies de animais, com os pesos de seus corpos em kg e de seus cérebros em gramas. Verifique se ele possui 28 linhas e 3 colunas.
+1. Utilizando o menu do RStudio, crie um novo markdown, com output em pdf, chamado `exercicios.Rmd`. Altere o cabeçalho deste arquivo, de modo que ele fique similar ao do arquivo `relatorio.Rmd`.
 
-```{r leitura}
-animais <- read.csv(file="animais.csv")
-dim(animais)
+2. Faça o resumo dos cinco números das varíaveis quantitativas do conjunto de dados. É possível perceber alguma assimetria olhando estes resultados?
+
+```{r iris_02}
+summary(iris[, 1:4])
 ```
 
-2. Carregue o pacote `knitr`. Utilize o comando `kable` para criar uma tabela que apresente os dados . Utilize o argumento `col.names` para nomear corretamente as colunas desta tabela. Crie um título para a tabela com o argumento `caption`.
+3. Rode os comandos 
 
-```{r tabela, message=FALSE}
+```{r iris_03, eval=FALSE}
+library(GGally)
+ggpairs(iris[, -5])
+```
+
+e interprete o resultado obtido.
+
+4. Identifique as duas variáveis que se corrrelacionam com maior intensidade. Ajuste um modelo de regressão linear entre elas. Utilize a variável com maior média como variável preditora.
+
+```{r iris_04}
+ajuste <- lm(Petal.Width ~ Petal.Length, data=iris)
+```
+
+5. Exiba os resultados do modelo de regressão ajustado no passo anterior em uma tabela. Interprete o resultado obtido.
+
+```{r iris_05}
+summary(ajuste)
+
+lm_traducao <- function(ajuste){
+  traducao <- summary(ajuste)$coefficients
+  colnames(traducao) <- c("Estimativa", "Erro Padrão", "t", "p-valor")
+  rownames(traducao) <- c("Intercepto", "Comprimento da Pétala")
+  return(traducao)
+}
+
 library(knitr)
-kable(animais, col.names=c("Animal", "Peso do Corpo (kg)", "Peso do Cérebro (g)"), caption="Pesos do corpo (em kg) e dos cérebros (em g) de 28 animais selecionados.")
+library(kableExtra)
+kable(lm_traducao(ajuste), format="latex", booktabs=TRUE,
+      caption="\\label{CarsLM_4} Resultado do ajuste de um modelo linear 
+      aos dados \\texttt{iris}.", digits=4) %>%
+  kable_styling(latex_options="hold_position")
 ```
 
-3. Altere o `caption` da tabela do exercício anterior para incluir `\\label{tab:animais}`. Escreva um pequeno texto descrevendo a tabela `\ref{tab:animais}`.
+6. Crie um gráfico de dispersão relacionando estas duas variáveis. Pinte cada ponto com uma cor associada à sua espécie.
 
-Como podemos ver na Tabela \ref{tab:animais}, a tendência do peso do cérebro de um animal tende a aumentar se o peso do animal aumenta.
+```{r iris_06}
+plot(Petal.Width ~ Petal.Length, data=iris, col=as.numeric(Species),
+     xlab="Comprimento da Pétala", ylab="Largura da Pétala")
 
-```{r tabelaCaption, message=FALSE}
-library(knitr)
-kable(animais, col.names=c("Animal", "Peso do Corpo (kg)", "Peso do Cérebro (g)"), caption="\\label{tab:animais} Pesos do corpo (em kg) e dos cérebros (em g) de 28 animais selecionados.")
-```
-
-
-4. Crie o gráfico de dispersão deste conjunto de dados. Utilize o peso do cérebro como variável resposta e o peso do corpo como variável preditora. Comente o que é possível perceber nele. Não esqueça de identificar corretamente os eixos.
-
-```{r graficoDispersao01}
-plot(cerebro ~ corpo, data=animais, xlab="Peso do Corpo (kg)", ylab="Peso do Cérebro (g)")
-```
-
-
-```{r graficoDispersao02}
 library(ggplot2)
-ggplot(animais, aes(x=corpo, y=cerebro)) +
-  geom_point()
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) +
+  geom_point(aes(colour=Species)) +
+  labs(x="Comprimento da Pétala", y="Largura da Pétala")
+```
+
+7. Adicione a reta de regressão ao gráfico criado no passo anterior.
+
+```{r iris_07}
+plot(Petal.Width ~ Petal.Length, data=iris, col=as.numeric(Species),
+     xlab="Comprimento da Pétala", ylab="Largura da Pétala")
+abline(ajuste)
+
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) +
+  geom_point(aes(colour=Species)) +
+  labs(x="Comprimento da Pétala", y="Largura da Pétala") +
+  stat_smooth(method="lm", se=FALSE)
+
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) +
+  geom_point(aes(colour=Species)) +
+  labs(x="Comprimento da Pétala", y="Largura da Pétala") +
+  geom_abline(slope=coef(ajuste)[2], intercept=coef(ajuste)[1])
+```
+
+8. Faça um boxplot comparando as observações da variável `Sepal.Width` entre as três espécies de plantas.
+
+
+```{r iris_08}
+boxplot(Sepal.Width ~ Species, data=iris, xlab="Espécies", 
+        ylab="Largura da Sépala")
+
+ggplot(iris, aes(x=Species, y=Sepal.Width)) +
+  geom_boxplot() +
+  labs(x="Espécies", y="Largura da Sépala")
 ```
 
 
+9. Teste as hipóteses
 
-iris
+\begin{align*}
+H_0 &: \mu_1 = \mu_2 = \mu_3 \\
+H_0 &: \mbox{pelo menos um par $\mu_i \neq \mu_j$, se $i \neq j$}
+\end{align*}
+
+\noindent em que $\mu_i$ é a média da variável `Sepal.Width` para os grupos 
+
+* $i = 1 \mbox{ (setosa})$
+
+* $i = 2 \mbox{ (versicolor})$
+
+* $i = 3 \mbox{ (virginica})$
+
+```{r iris_09}
+ajuste <- aov(Sepal.Width ~ Species, data=iris)
+summary(ajuste)
+```
+
+10. Utilize a função `TukeyHSD` para verificar quais diferenças entre as médias são diferentes de zero de maneira significante, com nível de confiança de 95%.
+
+```{r iris_10}
+TukeyHSD(ajuste)
+
+plot(TukeyHSD(ajuste))
+```
+
+

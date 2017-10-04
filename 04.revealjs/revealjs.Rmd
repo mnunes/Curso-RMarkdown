@@ -69,13 +69,15 @@ Vamos trabalhar nele juntos, descobrindo juntos o que pode ser feito nesta lingu
 
 R Markdown: http://rmarkdown.rstudio.com/
 
-Github: https://github.com/rstudio/rmarkdown
+Cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+
+Github: https://github.com/rstudio/rmarkdown e https://github.com/mnunes/Curso-RMarkdown
 
 StackOverflow: https://stackoverflow.com/questions/tagged/r-markdown
 
 StackOverflow Pt: https://pt.stackoverflow.com/questions/tagged/r
 
-## Gifs? Sim, gifs!
+## Pode usar GIFs? Sim, pode usar GIFs!
 
 ![](CarltonBanks.gif)
 
