@@ -22,7 +22,7 @@ Para rodar os exemplos disponíveis neste repositório, é necessário instalar 
 
 - Alguns pacotes do R, que podem ser instalados a partir do comando
 
-`source(http://github.com/mnunes/Curso-Rmarkdown/markdown-pacotes.R)`
+`source("http://github.com/mnunes/Curso-Rmarkdown/markdown-pacotes.R")`
 
 a ser rodado dentro do RStudio
 
