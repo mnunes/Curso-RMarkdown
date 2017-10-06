@@ -47,7 +47,7 @@ Note que os chunks reproduzem exatamente aquilo que o código do R deve reproduz
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
 ```
 
-Note que este chunk exibe tanto o código quanto o resultado do gráfico. Se estivéssemos escrevendo um relatório para um cliente, a parte do código deveria se eliminada. Felizmente, o `knitr` permite que coloquemos a opção `echo=FALSE` na definição do chunk e, assim, apenas o gráfico é produzido:
+Note que este chunk exibe tanto o código quanto o resultado do gráfico. Se estivéssemos escrevendo um relatório para um cliente, a parte do código deveria ser eliminada. Felizmente, o `knitr` permite que coloquemos a opção `echo=FALSE` na definição do chunk e, assim, apenas o gráfico é produzido:
 
 ```{r CarsPlot_3, echo=FALSE}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
