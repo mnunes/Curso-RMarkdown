@@ -1,7 +1,7 @@
 ---
 title: "R Markdown: Como Automatizar a Geração de Relatórios em R e HTML"
 author: "Marcus Nunes"
-date: "24 de outubro de 2017"
+date: "25 de outubro de 2017"
 output: 
   revealjs::revealjs_presentation:
     theme: default
@@ -79,5 +79,5 @@ StackOverflow Pt: https://pt.stackoverflow.com/questions/tagged/r
 
 ## Pode usar GIFs? Sim, pode usar GIFs!
 
-![](CarltonBanks.gif)
+![](imagem.gif)
 

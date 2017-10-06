@@ -1,7 +1,7 @@
 ---
 title: "Exercícios"
 author: "Marcus Nunes"
-date: "24 de outubro de 2017"
+date: "25 de outubro de 2017"
 output: pdf_document
 header-includes:
    - \usepackage[portuges]{babel}

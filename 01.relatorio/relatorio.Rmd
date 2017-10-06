@@ -1,7 +1,7 @@
 ---
 title: "Relatório"
 author: "Marcus Nunes"
-date: "24 de outubro de 2017"
+date: "25 de outubro de 2017"
 output: 
   pdf_document:
     number_sections: true
@@ -124,8 +124,6 @@ kable(lm_traducao(ajuste), format="latex", booktabs=TRUE,
       caption="\\label{CarsLM_4} Resultado do ajuste de um modelo linear 
       aos dados do pacote \\texttt{cars}.", digits=4) %>%
   kable_styling(latex_options="hold_position")
-
-
 ```
 
 Portanto, a Tabela \ref{CarsLM_4} ficou exatamente do jeito que imaginávamos. Agora podemos fazer o gráfico final da nossa análise, plotando os dados em conjunto com a reta ajustada. Este resultado se encontra na Figura \ref{CarsPlot_7}.

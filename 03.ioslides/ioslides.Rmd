@@ -1,7 +1,7 @@
 ---
 title: "R Markdown: Como Automatizar a Geração de Relatórios em R e HTML"
 author: "Marcus Nunes"
-date: "24 de outubro de 2017"
+date: "25 de outubro de 2017"
 output: 
   ioslides_presentation:
     incremental: true
@@ -38,7 +38,7 @@ R: <https://cran.r-project.org/mirrors.html>
 
 RStudio: <https://www.rstudio.com/products/rstudio/download2/>
 
-\LaTeX: <https://miktex.org/download> (Windows)
+LaTeX: <https://miktex.org/download> (Windows)
 
 Pessoas com experiência em R e LaTeX terão mais facilidade com este assunto
 
