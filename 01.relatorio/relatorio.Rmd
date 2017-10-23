@@ -71,7 +71,7 @@ Veja como consigo referenciar a Figura \ref{CarsPlot_5} como se eu estivesse uti
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)", col="red", pch=16)
 ```
 
-Portanto, a Figura \ref{CarsPlot_6} mostra aquilo que foi prometido no parágrafo anterior. Note que estamos de fato utilizando LaTeX, pois a figura na página nnao ficou onde desejávamos!
+Portanto, a Figura \ref{CarsPlot_6} mostra aquilo que foi prometido no parágrafo anterior. Note que estamos de fato utilizando LaTeX, pois a figura na página não ficou onde desejávamos!
 
 (podemos consertar isto, mas este não é o escopo deste minicurso)
 
