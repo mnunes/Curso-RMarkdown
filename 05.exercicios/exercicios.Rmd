@@ -2,7 +2,10 @@
 title: "Exercícios"
 author: "Marcus Nunes"
 date: "25 de outubro de 2017"
-output: pdf_document
+output: 
+  pdf_document:
+    number_sections: true
+    highlight: monochrome
 header-includes:
    - \usepackage[portuges]{babel}
 ---
@@ -29,6 +32,11 @@ ggpairs(iris[, -5])
 ```
 
 e interprete o resultado obtido.
+
+```{r iris_03b, eval=TRUE}
+library(GGally)
+ggpairs(iris[, -5])
+```
 
 4. Identifique as duas variáveis que se corrrelacionam com maior intensidade. Ajuste um modelo de regressão linear entre elas. Utilize a variável com maior média como variável preditora.
 
