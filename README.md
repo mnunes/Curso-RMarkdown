@@ -8,7 +8,7 @@ Entretanto, para que o trabalho possa ser lido, compreendido e reproduzido, é f
 
 Este minicurso vai mostrar como podemos utilizar a linguagem R Markdown para juntar R e LaTeX, com o intuito de automatizar a geração de relatórios. O pacote knitr vai ser utilizado para inserir, diretamente a partir do R, tabelas e gráficos em um documento. O minicurso será totalmente aplicado, pois os alunos irão aprender R Markdown enquanto praticam os ensinamentos no RStudio.
 
-_Minicurso ministrado na Universidade Federal do Rio Grande do Norte, durante a Semana da Estatística 2017_
+_Minicurso ministrado na Universidade Federal do Rio Grande do Norte, durante a Semana da Estatística 2017, em 25 de outubro_
 
 ## Requisitos do Sistema
 
