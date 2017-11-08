@@ -32,7 +32,7 @@ Este repositório possui as seguintes pastas:
 
 * **01.relatorio:** Esta pasta, junto com a pasta 02.slides, é o cerne do curso. Possui um arquivo chamado `relatorio.Rmd`, que é um relatório em que uma análise de dados é executada, mostrando várias das funcionalidades do Rmarkdown.
 
-* **02.slides:** Esta pasta, junto com a pasta 01.relatorio, é o cerne do curso. É  a apresentação de slides que serve de apoio e motivação ao curso. Utilizando o pacote Beamer, do LaTeX.
+* **02.slides:** Esta pasta, junto com a pasta 01.relatorio, é o cerne do curso. É  a apresentação de slides que serve de apoio e motivação ao curso. Utiliza o pacote Beamer do LaTeX.
 
 * **03.ioslides:** É uma apresentação de slides alternativa, feita em HTML. Seu conteúdo é idêntico ao da pasta 02.slides, mas não necessita de LaTeX ou Beamer.
 
