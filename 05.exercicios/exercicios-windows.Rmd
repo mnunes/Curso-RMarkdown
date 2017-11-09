@@ -1,0 +1,138 @@
+---
+title: "Exercícios"
+author: "Marcus Nunes"
+date: "25 de outubro de 2017"
+output: 
+  pdf_document:
+    number_sections: true
+    highlight: monochrome
+header-includes:
+   - \usepackage[portuges]{babel}
+---
+
+```{r setup, include=FALSE}
+tidy.opts=list(blank=FALSE, width.cutoff=60)
+```
+
+## Relatório
+
+1. Utilizando o menu do RStudio, crie um novo markdown, com output em pdf, chamado `exercicios.Rmd`. Altere o cabeçalho deste arquivo, de modo que ele fique similar ao do arquivo `relatorio.Rmd`.
+
+2. Faça o resumo dos cinco números das varíaveis quantitativas do conjunto de dados. É possível perceber alguma assimetria olhando estes resultados?
+
+```{r iris_02}
+summary(iris[, 1:4])
+```
+
+3. Rode os comandos 
+
+```{r iris_03, eval=FALSE}
+library(GGally)
+ggpairs(iris[, -5])
+```
+
+e interprete o resultado obtido.
+
+```{r iris_03b, eval=TRUE}
+library(GGally)
+ggpairs(iris[, -5])
+```
+
+4. Identifique as duas variáveis que se corrrelacionam com maior intensidade. Ajuste um modelo de regressão linear entre elas. Utilize a variável com maior média como variável preditora.
+
+```{r iris_04}
+ajuste <- lm(Petal.Width ~ Petal.Length, data=iris)
+```
+
+5. Exiba os resultados do modelo de regressão ajustado no passo anterior em uma tabela. Interprete o resultado obtido.
+
+```{r iris_05}
+summary(ajuste)
+
+lm_traducao <- function(ajuste){
+  traducao <- summary(ajuste)$coefficients
+  colnames(traducao) <- c("Estimativa", "Erro Padrão", "t", "p-valor")
+  rownames(traducao) <- c("Intercepto", "Comprimento da Pétala")
+  return(traducao)
+}
+
+library(knitr)
+library(kableExtra)
+kable(lm_traducao(ajuste), format="latex", booktabs=TRUE,
+      caption="\\label{CarsLM_4} Resultado do ajuste de um modelo linear 
+      aos dados \\texttt{iris}.", digits=4) %>%
+  kable_styling(latex_options="hold_position")
+```
+
+6. Crie um gráfico de dispersão relacionando estas duas variáveis. Pinte cada ponto com uma cor associada à sua espécie.
+
+```{r iris_06}
+plot(Petal.Width ~ Petal.Length, data=iris, col=as.numeric(Species),
+     xlab="Comprimento da Pétala", ylab="Largura da Pétala")
+
+library(ggplot2)
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) +
+  geom_point(aes(colour=Species)) +
+  labs(x="Comprimento da Pétala", y="Largura da Pétala")
+```
+
+7. Adicione a reta de regressão ao gráfico criado no passo anterior.
+
+```{r iris_07}
+plot(Petal.Width ~ Petal.Length, data=iris, col=as.numeric(Species),
+     xlab="Comprimento da Pétala", ylab="Largura da Pétala")
+abline(ajuste)
+
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) +
+  geom_point(aes(colour=Species)) +
+  labs(x="Comprimento da Pétala", y="Largura da Pétala") +
+  stat_smooth(method="lm", se=FALSE)
+
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width)) +
+  geom_point(aes(colour=Species)) +
+  labs(x="Comprimento da Pétala", y="Largura da Pétala") +
+  geom_abline(slope=coef(ajuste)[2], intercept=coef(ajuste)[1])
+```
+
+8. Faça um boxplot comparando as observações da variável `Sepal.Width` entre as três espécies de plantas.
+
+
+```{r iris_08}
+boxplot(Sepal.Width ~ Species, data=iris, xlab="Espécies", 
+        ylab="Largura da Sépala")
+
+ggplot(iris, aes(x=Species, y=Sepal.Width)) +
+  geom_boxplot() +
+  labs(x="Espécies", y="Largura da Sépala")
+```
+
+
+9. Teste as hipóteses
+
+\begin{align*}
+H_0 &: \mu_1 = \mu_2 = \mu_3 \\
+H_0 &: \mbox{pelo menos um par $\mu_i \neq \mu_j$, se $i \neq j$}
+\end{align*}
+
+\noindent em que $\mu_i$ é a média da variável `Sepal.Width` para os grupos 
+
+* $i = 1 \mbox{ (setosa})$
+
+* $i = 2 \mbox{ (versicolor})$
+
+* $i = 3 \mbox{ (virginica})$
+
+```{r iris_09}
+ajuste <- aov(Sepal.Width ~ Species, data=iris)
+summary(ajuste)
+```
+
+10. Utilize a função `TukeyHSD` para verificar quais diferenças entre as médias são diferentes de zero de maneira significante, com nível de confiança de 95%.
+
+```{r iris_10}
+TukeyHSD(ajuste)
+
+plot(TukeyHSD(ajuste))
+```
+
+
