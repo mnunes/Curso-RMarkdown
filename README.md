@@ -28,7 +28,7 @@ a ser rodado dentro do RStudio
 
 ## Organização do Repositório
 
-Este repositório possui as seguintes pastas:
+Este repositório possui as pastas descritas abaixo. Usuários do Windows devem utilizar os arquivos `.Rmd` com o sufixo windows, para que a acentuação dos caracteres fique correta em seus RStudio.
 
 * **01.relatorio:** Esta pasta, junto com a pasta 02.slides, é o cerne do curso. Possui um arquivo chamado `relatorio.Rmd`, que é um relatório em que uma análise de dados é executada, mostrando várias das funcionalidades do Rmarkdown.
 
