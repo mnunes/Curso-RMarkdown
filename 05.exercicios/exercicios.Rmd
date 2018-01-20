@@ -1,7 +1,7 @@
 ---
 title: "Exercícios"
 author: "Marcus Nunes"
-date: "25 de outubro de 2017"
+date: "19 de janeiro de 2018"
 output: 
   pdf_document:
     number_sections: true
@@ -14,7 +14,7 @@ header-includes:
 tidy.opts=list(blank=FALSE, width.cutoff=60)
 ```
 
-## Relatório
+# Relatório
 
 1. Utilizando o menu do RStudio, crie um novo markdown, com output em pdf, chamado `exercicios.Rmd`. Altere o cabeçalho deste arquivo, de modo que ele fique similar ao do arquivo `relatorio.Rmd`.
 

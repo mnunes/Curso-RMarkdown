@@ -1,7 +1,7 @@
 ---
 title: "R Markdown: Como Automatizar a Geração de Relatórios em R e HTML"
 author: "Marcus Nunes"
-date: "25 de outubro de 2017"
+date: "19 de janeiro de 2018"
 output: 
   ioslides_presentation:
     incremental: true

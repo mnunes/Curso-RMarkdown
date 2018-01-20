@@ -1,9 +1,9 @@
 ---
 title: "Relatório"
 author: "Marcus Nunes"
-date: "25 de outubro de 2017"
+date: "19 de janeiro de 2018"
 output: 
-  pdf_document:
+  bookdown::pdf_document2:
     number_sections: true
     highlight: monochrome
 header-includes:
@@ -33,63 +33,65 @@ summary(cars)
 
 > É possível até mesmo escrever **citações** com a linguagem!
 > 
-> *Nunes, M.A. (2017)*
+> *Nunes, M.A. (2018)*
 
 Mas vamos voltar à análise, pois é isto que importa aqui. Após nossas primeiras estatísticas descritivas a respeito destes dados, é interessante que façamos um gráfico relacionando distância e velocidade.
 
-```{r CarsPlot_1}
+```{r CarsPlot1}
 plot(dist ~ speed, data=cars)
 ```
 
 Note que os chunks reproduzem exatamente aquilo que o código do R deve reproduzir. Portanto, precisamos identificar corretamente os eixos do gráfico:
 
-```{r CarsPlot_2}
+```{r CarsPlot2}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
 ```
 
 Note que este chunk exibe tanto o código quanto o resultado do gráfico. Se estivéssemos escrevendo um relatório para um cliente, a parte do código deveria ser eliminada. Felizmente, o `knitr` permite que coloquemos a opção `echo=FALSE` na definição do chunk e, assim, apenas o gráfico é produzido:
 
-```{r CarsPlot_3, echo=FALSE}
+```{r CarsPlot3, echo=FALSE}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
 ```
 
 Se colocarmos a opção `eval=FALSE`, apenas o código é exibido, sem que o gráfico seja plotado:
 
-```{r CarsPlot_4, eval=FALSE}
+```{r CarsPlot4, eval=FALSE}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
 ```
 
-Se quisermos, podemos colocar um label na Figura, para que ela possa ser referenciada posteriormente:
+Se quisermos, podemos colocar uma caption na figura. Esta figura pode, inclusive, ser referenciada posteriormente:
 
-```{r CarsPlot_5, echo=FALSE, fig.cap="\\label{CarsPlot_5} Gráfico de dispersão entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+```{r CarsPlot5, echo=FALSE, fig.cap="Gráfico de dispersão entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
 ```
 
-Veja como consigo referenciar a Figura \ref{CarsPlot_5} como se eu estivesse utilizando LaTeX. Eu posso inclusive fazê-la novamente em outra cor, para mostrar que a numeração é atualizada como no LaTeX tradicional:
+Veja como consigo referenciar a Figura \@ref(fig:CarsPlot5) como se eu estivesse utilizando LaTeX. Note que preciso, obrigatoriamente, colocar `fig:` como referência para chmar a figura corretamente. Isto deve ser feito para **todas** as figuras do texto.
 
-```{r CarsPlot_6, echo=FALSE, fig.cap="\\label{CarsPlot_6} Gráfico de dispersão com os pontos em vermelho entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+Eu posso inclusive fazê-la novamente em outra cor, para mostrar que a numeração é atualizada como no LaTeX tradicional:
+
+```{r CarsPlot6, echo=FALSE, fig.cap="Gráfico de dispersão com os pontos em vermelho entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)", col="red", pch=16)
 ```
 
-Portanto, a Figura \ref{CarsPlot_6} mostra aquilo que foi prometido no parágrafo anterior. Note que estamos de fato utilizando LaTeX, pois a figura na página não ficou onde desejávamos!
+Portanto, a Figura \@ref(fig:CarsPlot6) mostra aquilo que foi prometido no parágrafo anterior. Note que estamos de fato utilizando LaTeX, pois a figura na página não ficou onde desejávamos!
 
 (podemos consertar isto, mas este não é o escopo deste minicurso)
 
 Além de gráficos, podemos ajustar modelos aos nossos dados. Vamos fazer uma regressão linear no conjunto de dados `cars`:
 
-```{r CarsLM_1}
+```{r CarsLM1}
 ajuste <- lm(dist ~ speed, data=cars)
 summary(ajuste)
 ```
 
 Este output seria interessante para nós, estatísticos. Mas e o usuário comum? Como proceder para que ele veja o resultado do ajuste que fizemos, sem utilizar o output padrão do `R`? Vamos usar o pacote `knitr` e a função `kable` para isto:
 
-```{r CarsLM_2}
+```{r CarsLM2}
 library(knitr)
 kable(summary(ajuste)$coefficients, format="latex")
 ```
 
-Note que conseguimos fazer uma tabela, mas ela está feia. Esta tabela 
+Perceba que conseguimos fazer uma tabela, mas ela está feia. Esta tabela 
 
 1. tem linhas demais
 
@@ -105,7 +107,7 @@ Note que conseguimos fazer uma tabela, mas ela está feia. Esta tabela
 
 Podemos corrigir todos estes problemas de maneira razoavelmente simples. Em primeiro lugar, vamos escrever uma função que traduza o ajuste feito pela função `lm`:
 
-```{r CarsLM_3}
+```{r CarsLM3}
 lm_traducao <- function(ajuste){
   traducao <- summary(ajuste)$coefficients
   colnames(traducao) <- c("Estimativa", "Erro Padrão", "t", "p-valor")
@@ -118,33 +120,35 @@ lm_traducao(ajuste)
 
 Pronto. Agora basta criarmos uma tabela da maneira que mais nos agrada:
 
-```{r CarsLM_4}
+```{r CarsLM4}
 library(kableExtra)
 kable(lm_traducao(ajuste), format="latex", booktabs=TRUE,
-      caption="\\label{CarsLM_4} Resultado do ajuste de um modelo linear 
+      caption="Resultado do ajuste de um modelo linear 
       aos dados do pacote \\texttt{cars}.", digits=4) %>%
   kable_styling(latex_options="hold_position")
 ```
 
-Portanto, a Tabela \ref{CarsLM_4} ficou exatamente do jeito que imaginávamos. Agora podemos fazer o gráfico final da nossa análise, plotando os dados em conjunto com a reta ajustada. Este resultado se encontra na Figura \ref{CarsPlot_7}.
+Portanto, a Tabela \@ref(tab:CarsLM4) ficou exatamente do jeito que imaginávamos. Note que, de modo análogo ao que fizemos com as figuras, precisamos obrigatoriamente colocar `tab:` como referência para chamar a tabela. Isto também deve ser feito para **todas** as tabelas do texto.
 
-```{r CarsPlot_7, fig.cap="\\label{CarsPlot_7} Resultado do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+Agora podemos fazer o gráfico final da nossa análise, plotando os dados em conjunto com a reta ajustada. Este resultado se encontra na Figura \@ref(fig:CarsPlot7).
+
+```{r CarsPlot7, fig.cap="Resultado do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
 abline(ajuste)
 ```
 
-Caso a Figura \ref{CarsPlot_7} tenha ficado muito grande, podemos alterar as suas dimensões, como no caso da Figura \ref{CarsPlot_8}.
+Caso a Figura \@ref(fig:CarsPlot7) tenha ficado muito grande, podemos alterar as suas dimensões, como no caso da Figura \@ref(fig:CarsPlot8).
 
-```{r CarsPlot_8, fig.height=8, fig.width=5, fig.cap="\\label{CarsPlot_8} Resultado do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora), com as dimensões alteradas."}
+```{r CarsPlot8, fig.height=8, fig.width=5, fig.cap="Resultado do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora), com as dimensões alteradas."}
 plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
 abline(ajuste)
 ```
 
 Quem já está acostumado com LaTeX percebe que o comportamento das figuras e tabelas do `knitr` é idêntica às figuras e tabelas do LaTeX: a posição de cada novo float é uma surpresa.
 
-Para que este relatório fique completo, só falta a análise dos resíduos do ajuste realizado. A Figura \ref{CarsPlot_9} exibe este resultado.
+Para que este relatório fique completo, só falta a análise dos resíduos do ajuste realizado. A Figura \@ref(fig:CarsPlot9) exibe este resultado.
 
-```{r CarsPlot_9, fig.height=8, fig.cap="\\label{CarsPlot_9} Gráficos de diagnóstico do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+```{r CarsPlot9, fig.height=8, fig.cap="Gráficos de diagnóstico do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
 par(mfrow=c(2,2))
 plot(ajuste)
 ```

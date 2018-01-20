@@ -1,0 +1,232 @@
+---
+title: "Relatório"
+author: "Marcus Nunes"
+date: "19 de janeiro de 2018"
+output: 
+  bookdown::html_document2:
+    number_sections: true
+    highlight: monochrome
+header-includes:
+   - \usepackage[portuges]{babel}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy=FALSE)
+tidy.opts=list(blank=FALSE, width.cutoff=60)
+```
+
+# Relatório
+
+Vamos analisar o conjunto de dados cars, presente na memória do R. A partir de agora, cada trecho deste arquivo `.Rmd` que inicie com \texttt{```} vai ser chamado de `chunk`. Cada `chunk` é um trecho de código do `R` que será executado e cujo output irá diretamente para o pdf final.
+
+```{r Cars}
+cars
+```
+
+Este é um conjunto de dados com 50 linhas. Estas linhas ocupam muito espaço na página. Então, em vez de exibi-lo inteiro, vamos calcular algumas estatísticas a seu respeito.
+
+```{r CarsSummary}
+summary(cars)
+```
+
+**Interessante**. Encontramos o *Resumo dos Cinco Números* do conjunto de dados `cars`. Aliás, perceba como aproveitei este pequeno parágrafo para demonstrar algumas ~~poçibilidades~~ possibilidades de formatação de texto utilizando R Markdown.
+
+> É possível até mesmo escrever **citações** com a linguagem!
+> 
+> *Nunes, M.A. (2018)*
+
+Mas vamos voltar à análise, pois é isto que importa aqui. Após nossas primeiras estatísticas descritivas a respeito destes dados, é interessante que façamos um gráfico relacionando distância e velocidade.
+
+```{r CarsPlot1}
+plot(dist ~ speed, data=cars)
+```
+
+Note que os chunks reproduzem exatamente aquilo que o código do R deve reproduzir. Portanto, precisamos identificar corretamente os eixos do gráfico:
+
+```{r CarsPlot2}
+plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
+```
+
+Note que este chunk exibe tanto o código quanto o resultado do gráfico. Se estivéssemos escrevendo um relatório para um cliente, a parte do código deveria ser eliminada. Felizmente, o `knitr` permite que coloquemos a opção `echo=FALSE` na definição do chunk e, assim, apenas o gráfico é produzido:
+
+```{r CarsPlot3, echo=FALSE}
+plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
+```
+
+Se colocarmos a opção `eval=FALSE`, apenas o código é exibido, sem que o gráfico seja plotado:
+
+```{r CarsPlot4, eval=FALSE}
+plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
+```
+
+Se quisermos, podemos colocar uma caption na figura. Esta figura pode, inclusive, ser referenciada posteriormente:
+
+```{r CarsPlot5, echo=FALSE, fig.cap="Gráfico de dispersão entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
+```
+
+Veja como consigo referenciar a Figura \@ref(fig:CarsPlot5) como se eu estivesse utilizando LaTeX. Note que preciso, obrigatoriamente, colocar `fig:` como referência para chmar a figura corretamente. Isto deve ser feito para **todas** as figuras do texto.
+
+Eu posso inclusive fazê-la novamente em outra cor, para mostrar que a numeração é atualizada como no LaTeX tradicional:
+
+```{r CarsPlot6, echo=FALSE, fig.cap="Gráfico de dispersão com os pontos em vermelho entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)", col="red", pch=16)
+```
+
+Portanto, a Figura \@ref(fig:CarsPlot6) mostra aquilo que foi prometido no parágrafo anterior. Note que estamos de fato utilizando LaTeX, pois a figura na página não ficou onde desejávamos!
+
+(podemos consertar isto, mas este não é o escopo deste minicurso)
+
+Além de gráficos, podemos ajustar modelos aos nossos dados. Vamos fazer uma regressão linear no conjunto de dados `cars`:
+
+```{r CarsLM1}
+ajuste <- lm(dist ~ speed, data=cars)
+summary(ajuste)
+```
+
+Este output seria interessante para nós, estatísticos. Mas e o usuário comum? Como proceder para que ele veja o resultado do ajuste que fizemos, sem utilizar o output padrão do `R`? Vamos usar o pacote `knitr` e a função `kable` para isto:
+
+```{r CarsLM2}
+library(knitr)
+kable(summary(ajuste)$coefficients, format="latex")
+```
+
+Perceba que conseguimos fazer uma tabela, mas ela está feia. Esta tabela 
+
+1. tem linhas demais
+
+2. está fora de centro
+
+3. não tem título 
+
+4. tem muitos dígitos
+
+5. as colunas não estão em português
+
+6. mas olhe pelo lado bom: pelo menos aprendemos a fazer uma lista numerada no markdown
+
+Podemos corrigir todos estes problemas de maneira razoavelmente simples. Em primeiro lugar, vamos escrever uma função que traduza o ajuste feito pela função `lm`:
+
+```{r CarsLM3}
+lm_traducao <- function(ajuste){
+  traducao <- summary(ajuste)$coefficients
+  colnames(traducao) <- c("Estimativa", "Erro Padrão", "t", "p-valor")
+  rownames(traducao) <- c("Intercepto", "Velocidade")
+  return(traducao)
+}
+
+lm_traducao(ajuste)
+```
+
+Pronto. Agora basta criarmos uma tabela da maneira que mais nos agrada:
+
+```{r CarsLM4}
+library(kableExtra)
+kable(lm_traducao(ajuste), format="latex", booktabs=TRUE,
+      caption="Resultado do ajuste de um modelo linear 
+      aos dados do pacote \\texttt{cars}.", digits=4) %>%
+  kable_styling(latex_options="hold_position")
+```
+
+Portanto, a Tabela \@ref(tab:CarsLM4) ficou exatamente do jeito que imaginávamos. Note que, de modo análogo ao que fizemos com as figuras, precisamos obrigatoriamente colocar `tab:` como referência para chamar a tabela. Isto também deve ser feito para **todas** as tabelas do texto.
+
+Agora podemos fazer o gráfico final da nossa análise, plotando os dados em conjunto com a reta ajustada. Este resultado se encontra na Figura \@ref(fig:CarsPlot7).
+
+```{r CarsPlot7, fig.cap="Resultado do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
+abline(ajuste)
+```
+
+Caso a Figura \@ref(fig:CarsPlot7) tenha ficado muito grande, podemos alterar as suas dimensões, como no caso da Figura \@ref(fig:CarsPlot8).
+
+```{r CarsPlot8, fig.height=8, fig.width=5, fig.cap="Resultado do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora), com as dimensões alteradas."}
+plot(dist ~ speed, data=cars, xlab="Velocidade (mph)", ylab="Distância (pés)")
+abline(ajuste)
+```
+
+Quem já está acostumado com LaTeX percebe que o comportamento das figuras e tabelas do `knitr` é idêntica às figuras e tabelas do LaTeX: a posição de cada novo float é uma surpresa.
+
+Para que este relatório fique completo, só falta a análise dos resíduos do ajuste realizado. A Figura \@ref(fig:CarsPlot9) exibe este resultado.
+
+```{r CarsPlot9, fig.height=8, fig.cap="Gráficos de diagnóstico do ajuste linear entre a distância necessária para frear completamente um carro (em pés) e sua velocidade (em milhas por hora)."}
+par(mfrow=c(2,2))
+plot(ajuste)
+```
+
+\clearpage
+
+Note que, assim como no caso da tabela com o output do modelo de regressão, os gráficos de diagnóstico possuem os títulos e nomes dos eixos em inglês. Vou aproveitar os anos de experiência como instrutor de Matemática, Estatística e `R` e vou deixar registrada a seguinte maneira de lidar com este problema:
+
+> A tradução destes gráficos fica como exercício para o leitor.
+> 
+> *Todo autor de livro matemático quando está com preguiça de trabalhar.*
+
+Com tudo pronto e aprendido, podemos passar agora à nossa prática.
+
+
+
+# Exercícios
+
+Os exercícios de análise de dados a seguir foram baseados no conjunto de dados `iris`, presente na memória do `R`. Basta digitar `iris no console para ter acesso ao seu conteúdo.
+
+Este conjunto de dados possui 150 linhas e 5 colunas. Ele possui 4 medidas a respeito de três espécies de flores, chamadas _Iris setosa_, _Iris versicolor_ e _Iris virginica_. As 4 medidas disponíveis para estas flores são
+
+* Sepal.Length: comprimento da sépala
+
+* Sepal.Width: largura da sépala
+
+* Petal.Length: comprimento da pétala
+
+* Petal.Width: largura da pétala
+
+Todas estas 4 medidas estão disponíveis para as 3 espécies de flores.
+
+A não ser que seja especificado de outra forma no enunciado, as respostas dos exercícios devem conter o código de resolução da questão e seu output desejado.
+
+Caso a solução de alguma questão não seja encontrada neste arquivo de exemplo, utilize o Google para procurar uma maneira de resolvê-la.
+
+1. Utilizando o menu do RStudio, crie um novo markdown, com output em pdf, chamado `exercicios.Rmd`. Altere o cabeçalho deste arquivo, de modo que ele fique similar ao do arquivo `relatorio.Rmd`.
+
+2. Faça o resumo dos cinco números das varíaveis quantitativas do conjunto de dados. É possível perceber alguma assimetria olhando estes resultados?
+
+3. Rode os comandos 
+
+```{r iris_01, eval=FALSE}
+library(GGally)
+ggpairs(iris[, -5])
+```
+
+e interprete o resultado obtido.
+
+4. Escolha as duas variáveis que se relacionam com maior intensidade e ajuste um modelo de regressão linear entre elas.
+
+5. Exiba em uma tabela os resultados do modelo de regressão ajustado no passo anterior. Interprete o resultado obtido.
+
+6. Crie um gráfico de dispersão relacionando estas duas variáveis. Pinte cada ponto com uma cor associada à sua espécie.
+
+7. Faça um boxplot comparando as observações da variável `Sepal.Width` entre as três espécies de plantas.
+
+8. Teste as hipóteses
+
+\begin{align*}
+H_0 &: \mu_1 = \mu_2 = \mu_3 \\
+H_0 &: \mbox{pelo menos um par $\mu_i \neq \mu_j$, se $i \neq j$}
+\end{align*}
+
+\noindent em que $\mu_i$ é a média da variável `Sepal.Width` para os grupos 
+
+* $i = 1 \mbox{ (setosa})$
+
+* $i = 2 \mbox{ (versicolor})$
+
+* $i = 3 \mbox{ (virginica})$
+
+9. Interprete o resultado do comando anterior.
+
+10. Utilize a função `TukeyHSD` para verificar quais diferenças entre as médias são diferentes de zero de maneira significante, com nível de confiança de 95%.
+
+
+
+
+
+
