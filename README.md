@@ -30,9 +30,9 @@ a ser rodado dentro do RStudio
 
 Este repositório possui as pastas descritas abaixo. Usuários do Windows devem utilizar os arquivos `.Rmd` com o sufixo windows, para que a acentuação dos caracteres fique correta em seus RStudio.
 
-* **01.relatorio_pdf:** Esta pasta, junto com a pasta `03.slides`, é o cerne do curso. Possui um arquivo chamado `relatorio.Rmd`, que é um relatório em que uma análise de dados é executada a fim de exibir várias das funcionalidades do R Markdown.
+* **01.relatorio_pdf:** Esta pasta, junto com a pasta `03.slides`, é o cerne do curso. Possui um arquivo chamado `relatorio.Rmd`, que é um relatório em que uma análise de dados é executada a fim de exibir várias das funcionalidades do R Markdown. Caso os acentos deste arquivo apareçam errados em seu computador, abra o arquivo `relatorio_windows.Rmd` para trabalhar.
 
-* **02.relatorio_pdf:** Conteúdo quase idêntico ao da pasta 01.relatorio_pdf. A diferença reside no priembulo do documento `.Rmd`, adaptado para gerar um html. Ideal para quem não possui LaTeX instalado no seu computador.
+* **02.relatorio_html:** Conteúdo quase idêntico ao da pasta 01.relatorio_pdf. A diferença reside no priembulo do documento `.Rmd`, adaptado para gerar um html. Ideal para quem não possui LaTeX instalado no seu computador.
 
 * **03.slides:** Esta pasta, junto com a pasta `01.relatorio_pdf`, é o cerne do curso. É  a apresentação de slides que serve de apoio e motivação ao curso. Utiliza o pacote Beamer do LaTeX.
 
