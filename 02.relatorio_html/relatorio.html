@@ -473,12 +473,70 @@ Figure 1.2: Gráfico de dispersão com os pontos em vermelho entre a distância 
 ## Velocidade   3.932409   0.4155128  9.463990 1.489836e-12</code></pre>
 <p>Pronto. Agora basta criarmos uma tabela da maneira que mais nos agrada:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(kableExtra)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">kable</span>(<span class="kw">lm_traducao</span>(ajuste), <span class="dt">format=</span><span class="st">&quot;latex&quot;</span>, <span class="dt">booktabs=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">kable</span>(<span class="kw">lm_traducao</span>(ajuste), <span class="dt">format=</span><span class="st">&quot;html&quot;</span>, <span class="dt">booktabs=</span><span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">      <span class="dt">caption=</span><span class="st">&quot;Resultado do ajuste de um modelo linear </span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">      aos dados do pacote </span><span class="ch">\\</span><span class="st">texttt{cars}.&quot;</span>, <span class="dt">digits=</span><span class="dv">4</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options=</span><span class="st">&quot;hold_position&quot;</span>)</a></code></pre></div>
-
-<p>Portanto, a Tabela <a href="#tab:CarsLM4"><strong>??</strong></a> ficou exatamente do jeito que imaginávamos. Note que, de modo análogo ao que fizemos com as figuras, precisamos obrigatoriamente colocar <code>tab:</code> como referência para chamar a tabela. Isto também deve ser feito para <strong>todas</strong> as tabelas do texto.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:CarsLM4">Table 1.1: </span>Resultado do ajuste de um modelo linear aos dados do pacote .
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Estimativa
+</th>
+<th style="text-align:right;">
+Erro Padrão
+</th>
+<th style="text-align:right;">
+t
+</th>
+<th style="text-align:right;">
+p-valor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Intercepto
+</td>
+<td style="text-align:right;">
+-17.5791
+</td>
+<td style="text-align:right;">
+6.7584
+</td>
+<td style="text-align:right;">
+-2.6011
+</td>
+<td style="text-align:right;">
+0.0123
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Velocidade
+</td>
+<td style="text-align:right;">
+3.9324
+</td>
+<td style="text-align:right;">
+0.4155
+</td>
+<td style="text-align:right;">
+9.4640
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+</tbody>
+</table>
+<p>Portanto, a Tabela <a href="#tab:CarsLM4">1.1</a> ficou exatamente do jeito que imaginávamos. Note que, de modo análogo ao que fizemos com as figuras, precisamos obrigatoriamente colocar <code>tab:</code> como referência para chamar a tabela. Isto também deve ser feito para <strong>todas</strong> as tabelas do texto.</p>
 <p>Agora podemos fazer o gráfico final da nossa análise, plotando os dados em conjunto com a reta ajustada. Este resultado se encontra na Figura <a href="#fig:CarsPlot7">1.3</a>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">plot</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data=</span>cars, <span class="dt">xlab=</span><span class="st">&quot;Velocidade (mph)&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Distância (pés)&quot;</span>)</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">abline</span>(ajuste)</a></code></pre></div>

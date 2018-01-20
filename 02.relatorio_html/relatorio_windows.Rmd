@@ -122,7 +122,7 @@ Pronto. Agora basta criarmos uma tabela da maneira que mais nos agrada:
 
 ```{r CarsLM4}
 library(kableExtra)
-kable(lm_traducao(ajuste), format="latex", booktabs=TRUE,
+kable(lm_traducao(ajuste), format="html", booktabs=TRUE,
       caption="Resultado do ajuste de um modelo linear 
       aos dados do pacote \\texttt{cars}.", digits=4) %>%
   kable_styling(latex_options="hold_position")

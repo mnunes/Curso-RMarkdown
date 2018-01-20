@@ -122,7 +122,7 @@ Pronto. Agora basta criarmos uma tabela da maneira que mais nos agrada:
 
 ```{r CarsLM4}
 library(kableExtra)
-kable(lm_traducao(ajuste), format="latex", booktabs=TRUE,
+kable(lm_traducao(ajuste), format="html", booktabs=TRUE,
       caption="Resultado do ajuste de um modelo linear 
       aos dados do pacote \\texttt{cars}.", digits=4) %>%
   kable_styling(latex_options="hold_position")
@@ -224,9 +224,5 @@ H_0 &: \mbox{pelo menos um par $\mu_i \neq \mu_j$, se $i \neq j$}
 9. Interprete o resultado do comando anterior.
 
 10. Utilize a função `TukeyHSD` para verificar quais diferenças entre as médias são diferentes de zero de maneira significante, com nível de confiança de 95%.
-
-
-
-
 
 
