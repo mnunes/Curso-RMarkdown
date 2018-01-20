@@ -8,7 +8,7 @@ Entretanto, para que o trabalho possa ser lido, compreendido e reproduzido, é f
 
 Este minicurso vai mostrar como podemos utilizar a linguagem R Markdown para juntar R e LaTeX, com o intuito de automatizar a geração de relatórios. O pacote knitr vai ser utilizado para inserir, diretamente a partir do R, tabelas e gráficos em um documento. O minicurso será totalmente aplicado, pois os alunos irão aprender R Markdown enquanto praticam os ensinamentos no RStudio.
 
-_Minicurso ministrado na Universidade Federal do Rio Grande do Norte, durante a Semana da Estatística 2017, em 25 de outubro_
+_Minicurso ministrado na Universidade Federal do Rio Grande do Norte, durante a Semana da Estatística 2017, em 25 de outubro. Arquivos atualizados em 19 de janeiro de 2018._
 
 ## Requisitos do Sistema
 
@@ -16,9 +16,9 @@ Para rodar os exemplos disponíveis neste repositório, é necessário instalar 
 
 - MikTex (versão 2.9 ou superior)
 
-- R (versão 3.4.1 ou superior)
+- R (versão 3.4.3 ou superior)
 
-- RStudio (versão 1.0.153 ou superior)
+- RStudio (versão 1.1.383 ou superior)
 
 - Alguns pacotes do R, que podem ser instalados a partir do comando
 
@@ -30,15 +30,17 @@ a ser rodado dentro do RStudio
 
 Este repositório possui as pastas descritas abaixo. Usuários do Windows devem utilizar os arquivos `.Rmd` com o sufixo windows, para que a acentuação dos caracteres fique correta em seus RStudio.
 
-* **01.relatorio:** Esta pasta, junto com a pasta 02.slides, é o cerne do curso. Possui um arquivo chamado `relatorio.Rmd`, que é um relatório em que uma análise de dados é executada, mostrando várias das funcionalidades do Rmarkdown.
+* **01.relatorio_pdf:** Esta pasta, junto com a pasta `03.slides`, é o cerne do curso. Possui um arquivo chamado `relatorio.Rmd`, que é um relatório em que uma análise de dados é executada a fim de exibir várias das funcionalidades do R Markdown.
 
-* **02.slides:** Esta pasta, junto com a pasta 01.relatorio, é o cerne do curso. É  a apresentação de slides que serve de apoio e motivação ao curso. Utiliza o pacote Beamer do LaTeX.
+* **02.relatorio_pdf:** Conteúdo quase idêntico ao da pasta 01.relatorio_pdf. A diferença reside no priembulo do documento `.Rmd`, adaptado para gerar um html. Ideal para quem não possui LaTeX instalado no seu computador.
 
-* **03.ioslides:** É uma apresentação de slides alternativa, feita em HTML. Seu conteúdo é idêntico ao da pasta 02.slides, mas não necessita de LaTeX ou Beamer.
+* **03.slides:** Esta pasta, junto com a pasta `01.relatorio_pdf`, é o cerne do curso. É  a apresentação de slides que serve de apoio e motivação ao curso. Utiliza o pacote Beamer do LaTeX.
 
-* **04.revealjs:** É uma apresentação de slides alternativa, feita em HTML, utilizando o framework reveal.js. Seu conteúdo é idêntico ao da pasta 02.slides, mas não necessita de LaTeX ou Beamer.
+* **04.ioslides:** É uma apresentação de slides alternativa, feita em HTML. Seu conteúdo é idêntico ao da pasta `03.slides`, mas não necessita de LaTeX ou Beamer.
 
-* **05.exercicios:** Respostas dos exercícios propostos no arquivo `relatorio.Rmd`
+* **05.revealjs:** É uma apresentação de slides alternativa, feita em HTML, utilizando o framework reveal.js. Seu conteúdo é idêntico ao da pasta `03.slides`, mas não necessita de LaTeX ou Beamer.
+
+* **06.exercicios:** Respostas dos exercícios propostos no arquivo `relatorio.Rmd`.
 
 Todas as pastas possuem o arquivo fonte do relatório ou apresentação a que dizem respeito, além do resultado compilado de cada arquivo fonte, bem como o arquivo de dados analisado, quando isto for aplicável.
 
