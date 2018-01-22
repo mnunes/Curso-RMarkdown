@@ -45,3 +45,6 @@ Este repositório possui as pastas descritas abaixo. Usuários do Windows devem 
 Todas as pastas possuem o arquivo fonte do relatório ou apresentação a que dizem respeito, além do resultado compilado de cada arquivo fonte, bem como o arquivo de dados analisado, quando isto for aplicável.
 
 
+<hr>
+
+Fique à vontade para utilizar este material em seus cursos ou aulas. Só não esqueça de me creditar. Mais informações sobre mim podem ser encontradas em [meu site pessoal](http://marcusnunes.me/).
